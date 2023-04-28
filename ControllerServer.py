@@ -1,15 +1,15 @@
-import time
+import time, keybaord
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-from pololu import Pololu
+from Pololu import Pololu
 
-max_throttle = 1400
-zero_throttle = 1450
-min_throttle = 1500
+max_throttle = 1400 # forward
+zero_throttle = 1450 # stop
+min_throttle = 1500 # backward
 
-max_left = 1000
-max_right = 2000
-zero_angle = 1500
+max_left = 1000 # left
+max_right = 2000 # right
+zero_angle = 1500 # neutral
 
 angle = zero_angle
 throttle = zero_throttle

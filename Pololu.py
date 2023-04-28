@@ -1,4 +1,4 @@
-import serial
+import time, serial
 import serial.tools.list_ports as stl
 
 class Pololu:
@@ -18,3 +18,12 @@ class Pololu:
         print(upper7)
         ba = bytearray([0x84, channel, lower7, upper7])
         self.pololu.write(ba)
+
+    def get_voltage(self, channel:int):
+        self.pololu.write(bytearray([0x90, channel]))
+        time.sleep(0.1)
+        b = self.pololu.read_all()
+        if len(b)==0: return -1
+        lower, upper = b[0], b[1]
+        signal = (upper<<8)+lower
+        return signal/1023*5 # 0-1023 mapped to 0-5 V
